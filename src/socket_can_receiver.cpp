@@ -37,6 +37,9 @@ namespace socketcan
 SocketCanReceiver::SocketCanReceiver(const std::string & interface)
 : m_file_descriptor{bind_can_socket(interface)}
 {
+  // turn off local loopback
+  // TODO: add an option for it
+  set_can_local_loopback(m_file_descriptor, 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

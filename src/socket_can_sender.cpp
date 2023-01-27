@@ -37,6 +37,9 @@ SocketCanSender::SocketCanSender(const std::string & interface, const CanId & de
 : m_file_descriptor{bind_can_socket(interface)},
   m_default_id{default_id}
 {
+  // turn off local loopback
+  // TODO: add an option for it
+  set_can_local_loopback(m_file_descriptor, 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -76,6 +76,19 @@ int32_t bind_can_socket(const std::string & interface)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void set_can_local_loopback(int32_t fd, int local_loopback)
+{
+  if (0 !=
+    setsockopt(
+      fd, SOL_CAN_RAW, CAN_RAW_LOOPBACK, &local_loopback,
+      sizeof(local_loopback)))
+  {
+    throw std::runtime_error{"Failed to set up CAN local loopback: " +
+            std::string{strerror(errno)}};
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 struct timeval to_timeval(const std::chrono::nanoseconds timeout) noexcept
 {
   const auto count = timeout.count();

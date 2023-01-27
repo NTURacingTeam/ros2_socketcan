@@ -34,6 +34,10 @@ namespace socketcan
 /// \throw std::runtime_error If one of socket(), fnctl(), ioctl(), bind() failed
 /// \throw std::domain_error If the provided interface name is too long
 int32_t bind_can_socket(const std::string & interface);
+/// Set SocketCan option for local loopback
+/// \param[in] fd File descriptor of the socket
+/// \param[in] local_loopback Should use local loopback?
+void set_can_local_loopback(int32_t fd, int local_loopback);
 /// Convert std::chrono duration to timeval (with microsecond resolution)
 struct timeval to_timeval(const std::chrono::nanoseconds timeout) noexcept;
 /// Convert timeval to time in microseconds
